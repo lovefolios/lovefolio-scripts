@@ -69,3 +69,14 @@ b.addEventListener("click", function() { if (b.classList.contains("on")) { if (r
 if (real) { a.addEventListener("timeupdate", function() { if (a.duration) { f.style.width = (a.currentTime / a.duration * 100) + "%"; n.textContent = fmt(a.currentTime); } }); a.addEventListener("ended", function() { stop(); }); }
 document.getElementById("player-previous").addEventListener("click", function() { t = 0; if (real) a.currentTime = 0; draw(); }); })();
 
+/* [01.18] MUSE + VERSE PAGES SCRIPT */
+
+function openPage(evt, id) { if (evt) evt.preventDefault(); var p = document.getElementById(id); if (!p) return false; $(".mcontent").not(p).stop(true, true).hide(); $(p).stop(true, true).fadeIn(300); updateBar(id); return false; }
+function closeAllPages() { $(".mcontent").stop(true, true).hide(); }
+function closePage(evt) { if (evt) evt.preventDefault(); var p = $(".mcontent:visible").first(); if (!p.length) return false; var back = p.attr("data-parent"); p.stop(true, true).fadeOut(250); if (back) updateBar(back); return false; }
+document.addEventListener("click", function(ev) { var t = ev.target; if (!t.closest) return; var st = t.closest("[data-star-rating] > div"); if (st) { var row = st.parentNode.children, k = Array.prototype.indexOf.call(row, st); for (var i = 0; i < row.length; i++) row[i].classList.toggle("on", i <= k); return; }
+var lk = t.closest("[data-like-count]"); if (lk) { var on = lk.classList.toggle("on"); lk.setAttribute("aria-pressed", on); lk.children[0].textContent = on ? "\u2665" : "\u2661"; lk.children[1].textContent = (parseInt(lk.getAttribute("data-like-count"), 10) || 0) + (on ? 1 : 0); return; }
+var ca = t.closest("[data-category-toggle]"); if (ca) { var ds = ca.closest(".test-muses-scroll").querySelectorAll("details"); for (var j = 0; j < ds.length; j++) ds[j].open = ca.getAttribute("data-category-toggle") === "open"; return; }
+var f = t.closest("[data-filter]"); if (f) { var sc = f.closest("[data-filter-group]"), v = f.getAttribute("data-filter"), ps = sc.querySelectorAll("[data-filter]"), its = sc.querySelectorAll("[data-filter-tags]"), m; for (m = 0; m < ps.length; m++) ps[m].classList.toggle("on", ps[m] === f); for (m = 0; m < its.length; m++) its[m].style.display = (v === "all" || (" " + its[m].getAttribute("data-filter-tags") + " ").indexOf(" " + v + " ") > -1) ? "" : "none"; } });
+document.addEventListener("keydown", function(ev) { var t = ev.target; if ((ev.key === "Enter" || ev.key === " ") && t.getAttribute && t.getAttribute("role") === "button" && t.closest && (t.closest(".mcontent") || t.closest(".verses-wrapper"))) { ev.preventDefault(); t.click(); } });
+
