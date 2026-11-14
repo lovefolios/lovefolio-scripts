@@ -68,4 +68,4 @@ function stop() { if (id) { clearInterval(id); id = null; } b.classList.remove("
 b.addEventListener("click", function() { if (b.classList.contains("on")) { if (real) a.pause(); stop(); } else { b.classList.add("on"); if (real) { a.play(); } else { id = setInterval(function() { t = (t + 1) % L; draw(); }, 1000); } } });
 if (real) { a.addEventListener("timeupdate", function() { if (a.duration) { f.style.width = (a.currentTime / a.duration * 100) + "%"; n.textContent = fmt(a.currentTime); } }); a.addEventListener("ended", function() { stop(); }); }
 document.getElementById("player-previous").addEventListener("click", function() { t = 0; if (real) a.currentTime = 0; draw(); }); })();
-</script>
+
