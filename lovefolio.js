@@ -44,7 +44,7 @@ for (var i = 0; i < jumps.length; i++) { (function(a) { a.addEventListener("clic
 /* [01.15] RULES PANEL SCRIPT */
 
 (function() { var rs = document.querySelectorAll(".rules-item"), t = document.getElementById("rules-selected-title"), b = document.getElementById("rules-selected-body"), m = document.getElementById("rules-selected-meta"), n = document.getElementById("rules-total"); if (!rs.length || !t) return; if (n) n.textContent = rs.length + (rs.length === 1 ? " item" : " items");
-function pick(e) { for (var i = 0; i < rs.length; i++) { rs[i].classList.toggle("on", rs[i] === e); } t.textContent = e.getAttribute("data-t"); b.textContent = e.getAttribute("data-b"); m.textContent = e.getAttribute("data-g") + " \u00b7 text document"; }
+function pick(e) { for (var i = 0; i < rs.length; i++) { rs[i].classList.toggle("on", rs[i] === e); } t.textContent = e.getAttribute("data-t"); b.innerHTML = e.getAttribute("data-b"); m.textContent = e.getAttribute("data-g") + " \u00b7 text document"; }
 for (var i = 0; i < rs.length; i++) { (function(e) { e.addEventListener("click", function() { pick(e); }); e.addEventListener("keydown", function(ev) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); pick(e); } }); })(rs[i]); }
 pick(rs[0]); })();
 
